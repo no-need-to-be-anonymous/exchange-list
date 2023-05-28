@@ -11,7 +11,7 @@ interface TableProps {
   favoriteCurrencyAdd: (currency: string) => void;
 }
 
-export const CurrencyTable = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Element => {
+export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Element => {
   const columns = useMemo<ColumnDef<Currency, any>[]>(
     () => [
       {

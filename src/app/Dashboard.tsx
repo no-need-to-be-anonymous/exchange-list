@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import { CurrencyTable } from '@/app/CurrencyTable';
+import { ExchangeList } from '@/app/ExchangeList';
 import { currencies } from '@/data/currencies';
 import { Currency } from '@/types';
 import { FavoriteCurrencies } from './FavoriteCurrencies';
 import { useFavoriteCurrency } from '@/context/FavoriteCurrencyContext';
 
-export const CurrencyList = (): JSX.Element => {
+export const Dashboard = (): JSX.Element => {
   const { favoriteCurrencies, favoriteCurrencyAdd, favoriteCurrencyDelete } = useFavoriteCurrency();
 
   const currenciesList: Currency[] = useMemo(
@@ -24,7 +24,7 @@ export const CurrencyList = (): JSX.Element => {
   return (
     <div className="w-full flex justify-center flex-col items-center gap-5 px-10 py-5">
       <FavoriteCurrencies favoriteCurrencies={favoriteCurrenciesList} favoriteCurrencyDelete={favoriteCurrencyDelete} />
-      <CurrencyTable favoriteCurrencyAdd={favoriteCurrencyAdd} data={currenciesList} />
+      <ExchangeList favoriteCurrencyAdd={favoriteCurrencyAdd} data={currenciesList} />
     </div>
   );
 };
