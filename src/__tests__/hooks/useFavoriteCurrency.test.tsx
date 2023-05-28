@@ -2,6 +2,7 @@ import { FavoriteCurrencyProvider, useFavoriteCurrency } from '@/context/Favorit
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor } from '@testing-library/react';
 import { LS } from '@/constants';
+import { act } from 'react-dom/test-utils';
 
 describe('useFavoriteCurrency', () => {
   let setItemSpy: jest.SpyInstance;
@@ -30,7 +31,9 @@ describe('useFavoriteCurrency', () => {
       wrapper: FavoriteCurrencyProvider,
     });
 
-    result.current.favoriteCurrencyAdd(favoriteCurrency);
+    act(() => {
+      result.current.favoriteCurrencyAdd(favoriteCurrency);
+    });
 
     expect(result.current.favoriteCurrencies).toContain(favoriteCurrency);
   });
@@ -41,8 +44,10 @@ describe('useFavoriteCurrency', () => {
       wrapper: FavoriteCurrencyProvider,
     });
 
-    result.current.favoriteCurrencyAdd(favoriteCurrency);
-    result.current.favoriteCurrencyAdd(favoriteCurrency);
+    act(() => {
+      result.current.favoriteCurrencyAdd(favoriteCurrency);
+      result.current.favoriteCurrencyAdd(favoriteCurrency);
+    });
 
     expect(result.current.favoriteCurrencies).toHaveLength(1);
     expect(result.current.favoriteCurrencies).toContain(favoriteCurrency);
@@ -54,7 +59,9 @@ describe('useFavoriteCurrency', () => {
       wrapper: FavoriteCurrencyProvider,
     });
 
-    result.current.favoriteCurrencyAdd(favoriteCurrency);
+    act(() => {
+      result.current.favoriteCurrencyAdd(favoriteCurrency);
+    });
 
     await waitFor(() => {
       // calles twice because of initial render
@@ -69,12 +76,14 @@ describe('useFavoriteCurrency', () => {
       wrapper: FavoriteCurrencyProvider,
     });
 
-    result.current.favoriteCurrencyAdd(favoriteCurrency);
-    result.current.favoriteCurrencyDelete(favoriteCurrency);
+    act(() => {
+      result.current.favoriteCurrencyAdd(favoriteCurrency);
+      result.current.favoriteCurrencyDelete(favoriteCurrency);
+    });
 
     await waitFor(() => {
       // calles 3 times because of initial render
-      expect(setItemSpy).toHaveBeenCalledTimes(3);
+      expect(setItemSpy).toHaveBeenCalledTimes(2);
       expect(setItemSpy).toHaveBeenCalledWith(LS.FAVORITE_CURRENCIES, JSON.stringify([]));
     });
   });
@@ -84,9 +93,11 @@ describe('useFavoriteCurrency', () => {
       wrapper: FavoriteCurrencyProvider,
     });
 
-    result.current.favoriteCurrencyAdd('CZK');
-    result.current.favoriteCurrencyAdd('USD');
-    result.current.favoriteCurrencyDelete('USD');
+    act(() => {
+      result.current.favoriteCurrencyAdd('CZK');
+      result.current.favoriteCurrencyAdd('USD');
+      result.current.favoriteCurrencyDelete('USD');
+    });
 
     expect(result.current.favoriteCurrencies).not.toContain('USD');
   });
