@@ -69,7 +69,7 @@ export const FavoriteCurrencies = ({ favoriteCurrencies, favoriteCurrencyDelete 
       {favoriteCurrencies.length === 0 ? (
         <div className="text-typography-secondary font-medium">Nemáte žádné oblíbené měny</div>
       ) : (
-        <Table columns={columns} data={favoriteCurrencies} />
+        <Table key={2} columns={columns} data={favoriteCurrencies} />
       )}
     </>
   );

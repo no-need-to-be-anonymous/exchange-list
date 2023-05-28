@@ -4,7 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Currency } from '@/types';
 import { useMemo } from 'react';
 import { formatNumber } from '@/utils/formatNumber';
-import { Table } from './Table';
+import { Table } from '../components/Table/Table';
 
 interface TableProps {
   data: Currency[];
@@ -67,7 +67,7 @@ export const CurrencyTable = ({ data, favoriteCurrencyAdd }: TableProps): JSX.El
   return (
     <div className="bg-container-secondary px-10 py-5">
       <h2 className="text-typography-secondary text-center">Seznam všech kurzů</h2>
-      <Table columns={columns} data={data} />
+      <Table key={1} columns={columns} data={data} />
     </div>
   );
 };

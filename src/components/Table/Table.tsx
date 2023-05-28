@@ -15,16 +15,16 @@ export const Table = ({ columns, data }: TableProps): JSX.Element => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const rowClass = `grid grid-cols-7 grid-rows-${columns.length} items-center py-3 w-full gap-4 px-4`;
+  const rowClass = `grid grid-cols-${columns.length} items-center py-3 w-full gap-4 px-4`;
 
   return (
     <div>
-      {getHeaderGroups().map((headerGroup, index) => {
+      {getHeaderGroups().map((headerGroup) => {
         return (
-          <div className={`${rowClass}`} key={index}>
-            {headerGroup.headers.map((header, index) => {
+          <div className={`${rowClass}`} key={headerGroup.id}>
+            {headerGroup.headers.map((header) => {
               return (
-                <div key={index} className={'text-typography-primary font-medium'}>
+                <div key={header.id} className={'text-typography-primary font-medium'}>
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </div>
               );
@@ -33,12 +33,12 @@ export const Table = ({ columns, data }: TableProps): JSX.Element => {
         );
       })}
       <div className="flex flex-col gap-2">
-        {getRowModel().rows.map((row, index) => {
+        {getRowModel().rows.map((row) => {
           return (
-            <div key={index} className={`${rowClass} border-1 border-typography-secondary bg-container-tertiary`}>
+            <div key={row.id} className={`${rowClass} border-1 border-typography-secondary bg-container-tertiary`}>
               {row.getVisibleCells().map((cell) => {
                 return (
-                  <div key={cell.row.original.shortName} className={'text-typography-secondary'}>
+                  <div key={cell.row.id} className={'text-typography-secondary'}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </div>
                 );

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CurrencyTable } from '@/components/Table/CurrencyTable';
+import { CurrencyTable } from '@/app/CurrencyTable';
 import { currencies } from '@/data/currencies';
 import { Currency } from '@/types';
 import { FavoriteCurrencies } from './FavoriteCurrencies';
