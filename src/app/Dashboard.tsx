@@ -10,7 +10,7 @@ import { useFavoriteCurrency } from '@/context/FavoriteCurrencyContext';
 export const Dashboard = (): JSX.Element => {
   const { favoriteCurrencies, favoriteCurrencyAdd, favoriteCurrencyDelete } = useFavoriteCurrency();
 
-  const currenciesList: Currency[] = useMemo(
+  const currenciesList = useMemo<Currency[]>(
     () =>
       currencies.map((item) => ({
         ...item,

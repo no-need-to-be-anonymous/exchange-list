@@ -31,3 +31,27 @@ body {
     font-weight: 500;
   }
 }
+
+/* Ant Design tabs overrides */
+.ant-tabs-nav-wrap {
+  gap: 0 !important;
+}
+
+.ant-tabs-tab {
+  border-radius: 0 !important;
+  border: 2px solid #1d4ed8 !important;
+  margin-left: -2px !important;
+}
+
+.ant-tabs-nav::before {
+  border-bottom: none !important;
+}
+
+.ant-tabs-tab-active {
+  background: #1d4ed8 !important;
+  color: #fff !important;
+}
+
+.ant-tabs-tab-active > .ant-tabs-tab-btn {
+  color: #fff !important;
+}

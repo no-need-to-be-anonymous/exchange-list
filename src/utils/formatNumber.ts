@@ -1,9 +1,7 @@
-export const formatNumber = (
-  value: number,
-  options: Intl.NumberFormatOptions = {
+export const formatNumber = (value: number, options?: Intl.NumberFormatOptions) => {
+  return new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 3,
     maximumFractionDigits: 3,
-  }
-) => {
-  return new Intl.NumberFormat('en-US', options).format(value);
+    ...options,
+  }).format(value);
 };
