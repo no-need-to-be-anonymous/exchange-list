@@ -1,5 +1,6 @@
 import { FavoriteCurrencyProvider } from '@/context/FavoriteCurrencyContext';
 import { Dashboard } from './Dashboard';
+import 'antd/dist/reset.css';
 
 export default function Home() {
   return (

@@ -44,13 +44,6 @@ export const FavoriteCurrencyProvider: React.FC<PropsWithChildren> = ({ children
     window.localStorage.setItem(LS.FAVORITE_CURRENCIES, JSON.stringify(favoriteCurrencies));
   }, [favoriteCurrencies]);
 
-  // useEffect(() => {
-  //   const favoriteCurrenciesFromLocalStorage = window.localStorage.getItem('favoriteCurrencies');
-  //   if (favoriteCurrenciesFromLocalStorage) {
-  //     setFavoriteCurrencies(JSON.parse(favoriteCurrenciesFromLocalStorage));
-  //   }
-  // }, []);
-
   return (
     <FavoriteCurrencyContext.Provider
       value={{

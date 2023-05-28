@@ -55,3 +55,7 @@ body {
 .ant-tabs-tab-active > .ant-tabs-tab-btn {
   color: #fff !important;
 }
+
+.ant-tabs-nav-operations {
+  display: none !important;
+}

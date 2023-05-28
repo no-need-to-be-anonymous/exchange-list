@@ -7,6 +7,7 @@ import { formatNumber } from '@/utils/formatNumber';
 import { Table } from '../components/Table/Table';
 import { Tabs, TabsProps } from 'antd';
 import { makePredictedExchanges } from '@/utils/makePredictedExchanges';
+import { commonColumns } from '@/helpers/commonTableColumns';
 
 interface TableProps {
   data: Currency[];
@@ -36,30 +37,9 @@ export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Ele
   const [activeView, setActiveView] = useState('0');
   const [exchangeList, setExchangeList] = useState<Currency[]>(data);
 
-  const columns = useMemo<ColumnDef<Currency, any>[]>(
+  const columns = useMemo<ColumnDef<Currency, string>[]>(
     () => [
-      {
-        header: 'Měna',
-        accessorFn: (row) => `${row.shortName} ${row.name}`,
-      },
-      {
-        header: 'Země',
-        accessorKey: 'country',
-      },
-      {
-        header: 'Nákup',
-        accessorKey: 'buy',
-        accessorFn: (row) => formatNumber(row.buy),
-      },
-      {
-        header: 'Prodej',
-        accessorFn: (row) => formatNumber(row.sell),
-      },
-      {
-        header: 'CNB',
-        accessorKey: 'cnb',
-        accessorFn: (row) => formatNumber(row.cnb),
-      },
+      ...commonColumns,
       {
         header: () => {
           if (activeView === '0' || activeView === '1') return 'Změna / 1 den';
@@ -69,7 +49,7 @@ export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Ele
         cell: (currency) => {
           const isNegative = Number(currency.getValue()) < 0;
           const valueColor = isNegative ? 'text-red-500' : 'text-green-500';
-          const value = formatNumber(currency.getValue(), { signDisplay: 'always' });
+          const value = formatNumber(Number(currency.getValue()), { signDisplay: 'always' });
           return <span className={`${valueColor}`}>{value}</span>;
         },
       },
