@@ -1,1 +1,1 @@
-export { CurrencyTable } from './Table';
+export { CurrencyTable } from './CurrencyTable';

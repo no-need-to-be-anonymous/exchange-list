@@ -1,59 +1,13 @@
-'use client';
-
-import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import { Currency } from '@/types';
-import { useMemo } from 'react';
-import { formatNumber } from '@/utils/formatNumber';
+import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
+import React from 'react';
 
 interface TableProps {
   data: Currency[];
+  columns: ColumnDef<Currency, any>[];
 }
 
-export const CurrencyTable = ({ data }: TableProps): JSX.Element => {
-  const columns = useMemo<ColumnDef<Currency, any>[]>(
-    () => [
-      {
-        header: 'Měna',
-        accessorFn: (row) => `${row.shortName} ${row.name}`,
-      },
-      {
-        header: 'Země',
-        accessorKey: 'country',
-      },
-      {
-        header: 'Nákup',
-        accessorKey: 'buy',
-        accessorFn: (row) => formatNumber(row.buy),
-      },
-      {
-        header: 'Prodej',
-        accessorFn: (row) => formatNumber(row.sell),
-      },
-      {
-        header: 'CNB',
-        accessorKey: 'cnb',
-        accessorFn: (row) => formatNumber(row.cnb),
-      },
-      {
-        header: 'Změna / 1den',
-        accessorKey: 'move',
-        cell: (currency) => {
-          const isNegative = Number(currency.getValue()) < 0;
-          const valueColor = isNegative ? 'text-red-500' : 'text-green-500';
-          const value = formatNumber(currency.getValue(), { signDisplay: 'always' });
-          return <span className={`${valueColor}`}>{value}</span>;
-        },
-      },
-      {
-        header: ' ',
-        cell: () => {
-          return <button className={'underline text-typography-secondary hover:text-typography-primary'}>Oblíbená</button>;
-        },
-      },
-    ],
-    []
-  );
-
+export const Table = ({ columns, data }: TableProps): JSX.Element => {
   const { getHeaderGroups, getRowModel } = useReactTable<Currency>({
     columns,
     data,
@@ -82,9 +36,9 @@ export const CurrencyTable = ({ data }: TableProps): JSX.Element => {
         {getRowModel().rows.map((row, index) => {
           return (
             <div key={index} className={`${rowClass} border-1 border-typography-secondary bg-container-tertiary`}>
-              {row.getVisibleCells().map((cell, index) => {
+              {row.getVisibleCells().map((cell) => {
                 return (
-                  <div key={index} className={'text-typography-secondary'}>
+                  <div key={cell.row.original.shortName} className={'text-typography-secondary'}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </div>
                 );

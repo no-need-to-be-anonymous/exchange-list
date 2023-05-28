@@ -1,6 +1,6 @@
-import { Currency } from '@/types';
+import { CurrencyAPI } from '@/types';
 
-export const currencies: Currency[] = [
+export const currencies: CurrencyAPI[] = [
   {
     shortName: 'AUD',
     name: 'Dolar',
