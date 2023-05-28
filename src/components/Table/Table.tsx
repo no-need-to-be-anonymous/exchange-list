@@ -35,7 +35,7 @@ export const Table = ({ columns, data }: TableProps): JSX.Element => {
       <div className="flex flex-col gap-2">
         {getRowModel().rows.map((row, index) => {
           return (
-            <div key={row.id + index} className={`${rowClass} border-1 border-typography-secondary bg-container-tertiary`}>
+            <div data-testid='body-row' key={row.id + index} className={`${rowClass} border-1 border-typography-secondary bg-container-tertiary`}>
               {row.getVisibleCells().map((cell, index) => {
                 return (
                   <div key={cell.row.id + index} className={'text-typography-secondary'}>
