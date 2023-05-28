@@ -8,6 +8,8 @@ import { Table } from '../components/Table/Table';
 import { Tabs, TabsProps } from 'antd';
 import { makePredictedExchanges } from '@/utils/makePredictedExchanges';
 import { commonColumns } from '@/helpers/commonTableColumns';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { parseViewFromUrl } from '@/utils/parseViewFromUrl';
 
 interface TableProps {
   data: Currency[];
@@ -34,8 +36,15 @@ const tabItems: TabsProps['items'] = [
 ];
 
 export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Element => {
-  const [activeView, setActiveView] = useState('0');
+  const params = useSearchParams();
+  const [activeView, setActiveView] = useState(parseViewFromUrl(params.get('view'), tabItems));
   const [exchangeList, setExchangeList] = useState<Currency[]>(data);
+  const router = useRouter();
+
+  const handleTabChange = (activeKey: string): void => {
+    router.push(`/?view=${activeKey}`);
+    setActiveView(activeKey);
+  };
 
   const columns = useMemo<ColumnDef<Currency, string>[]>(
     () => [
@@ -83,7 +92,7 @@ export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Ele
   return (
     <div className="bg-container-secondary px-10 py-5">
       <h2 className="text-typography-secondary text-center">Seznam všech kurzů</h2>
-      <Tabs centered activeKey={activeView} onChange={setActiveView} type="card" items={tabItems} />
+      <Tabs centered activeKey={activeView} onChange={handleTabChange} type="card" items={tabItems} />
       <Table key={1} columns={columns} data={exchangeList} />
     </div>
   );
