@@ -1,27 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { CurrencyTable } from '@/app/CurrencyTable';
 import { currencies } from '@/data/currencies';
 import { Currency } from '@/types';
 import { FavoriteCurrencies } from './FavoriteCurrencies';
+import { useFavoriteCurrency } from '@/context/FavoriteCurrencyContext';
 
 export const CurrencyList = (): JSX.Element => {
-  const [favoriteCurrencies, setFavoriteCurrencies] = React.useState<string[]>([]);
+  const { favoriteCurrencies, favoriteCurrencyAdd, favoriteCurrencyDelete } = useFavoriteCurrency();
 
-  const favoriteCurrencyDelete = (currencyCode: string) => {
-    setFavoriteCurrencies([...favoriteCurrencies.filter((item) => item !== currencyCode)]);
-  };
-
-  const favoriteCurrencyAdd = (currencyCode: string) => {
-    if (favoriteCurrencies.includes(currencyCode)) return;
-    setFavoriteCurrencies([...favoriteCurrencies, currencyCode]);
-  };
-
-  const currenciesList: Currency[] = currencies.map((item) => ({
-    ...item,
-    isFavorite: favoriteCurrencies.includes(item.shortName),
-  }));
+  const currenciesList: Currency[] = useMemo(
+    () =>
+      currencies.map((item) => ({
+        ...item,
+        isFavorite: favoriteCurrencies.includes(item.shortName),
+      })),
+    [favoriteCurrencies]
+  );
 
   const favoriteCurrenciesList: Currency[] = currenciesList.filter((item) => item.isFavorite);
 
