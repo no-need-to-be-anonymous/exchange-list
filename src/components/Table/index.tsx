@@ -1,1 +1,1 @@
-export { CurrencyTable } from '../../app/ExchangeList';
+export { ExchangeList } from '../../app/ExchangeList';
