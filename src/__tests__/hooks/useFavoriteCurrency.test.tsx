@@ -32,7 +32,7 @@ describe('useFavoriteCurrency', () => {
     });
 
     act(() => {
-      result.current.favoriteCurrencyAdd(favoriteCurrency);
+      result.current.addFavoriteCurrency(favoriteCurrency);
     });
 
     expect(result.current.favoriteCurrencies).toContain(favoriteCurrency);
@@ -45,8 +45,8 @@ describe('useFavoriteCurrency', () => {
     });
 
     act(() => {
-      result.current.favoriteCurrencyAdd(favoriteCurrency);
-      result.current.favoriteCurrencyAdd(favoriteCurrency);
+      result.current.addFavoriteCurrency(favoriteCurrency);
+      result.current.addFavoriteCurrency(favoriteCurrency);
     });
 
     expect(result.current.favoriteCurrencies).toHaveLength(1);
@@ -60,7 +60,7 @@ describe('useFavoriteCurrency', () => {
     });
 
     act(() => {
-      result.current.favoriteCurrencyAdd(favoriteCurrency);
+      result.current.addFavoriteCurrency(favoriteCurrency);
     });
 
     await waitFor(() => {
@@ -77,8 +77,8 @@ describe('useFavoriteCurrency', () => {
     });
 
     act(() => {
-      result.current.favoriteCurrencyAdd(favoriteCurrency);
-      result.current.favoriteCurrencyDelete(favoriteCurrency);
+      result.current.addFavoriteCurrency(favoriteCurrency);
+      result.current.deleteFavoriteCurrency(favoriteCurrency);
     });
 
     await waitFor(() => {
@@ -94,9 +94,9 @@ describe('useFavoriteCurrency', () => {
     });
 
     act(() => {
-      result.current.favoriteCurrencyAdd('CZK');
-      result.current.favoriteCurrencyAdd('USD');
-      result.current.favoriteCurrencyDelete('USD');
+      result.current.addFavoriteCurrency('CZK');
+      result.current.addFavoriteCurrency('USD');
+      result.current.deleteFavoriteCurrency('USD');
     });
 
     expect(result.current.favoriteCurrencies).not.toContain('USD');

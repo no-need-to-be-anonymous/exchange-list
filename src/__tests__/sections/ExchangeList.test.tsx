@@ -29,7 +29,7 @@ describe('ExchangeList', () => {
             isFavorite: false,
           },
         ]}
-        favoriteCurrencyAdd={jest.fn}
+        addFavoriteCurrency={jest.fn}
       />
     );
 
@@ -38,8 +38,8 @@ describe('ExchangeList', () => {
     expect(tableBodyRows).toHaveLength(1);
   });
 
-  it('should call favoriteCurrencyAdd when favorite button is clicked', () => {
-    const favoriteCurrencyAdd = jest.fn();
+  it('should call addFavoriteCurrency when favorite button is clicked', () => {
+    const addFavoriteCurrency = jest.fn();
     render(
       <ExchangeList
         data={[
@@ -54,18 +54,18 @@ describe('ExchangeList', () => {
             isFavorite: false,
           },
         ]}
-        favoriteCurrencyAdd={favoriteCurrencyAdd}
+        addFavoriteCurrency={addFavoriteCurrency}
       />
     );
     const favoriteButton = screen.getByRole('button', { name: 'Oblíbená' });
 
     favoriteButton.click();
 
-    expect(favoriteCurrencyAdd).toHaveBeenCalledTimes(1);
+    expect(addFavoriteCurrency).toHaveBeenCalledTimes(1);
   });
 
   it('should not display favorite button when currency is favorite', () => {
-    const favoriteCurrencyAdd = jest.fn();
+    const addFavoriteCurrency = jest.fn();
     render(
       <ExchangeList
         data={[
@@ -80,7 +80,7 @@ describe('ExchangeList', () => {
             isFavorite: true,
           },
         ]}
-        favoriteCurrencyAdd={favoriteCurrencyAdd}
+        addFavoriteCurrency={addFavoriteCurrency}
       />
     );
 
@@ -103,7 +103,7 @@ describe('ExchangeList', () => {
             isFavorite: true,
           },
         ]}
-        favoriteCurrencyAdd={jest.fn}
+        addFavoriteCurrency={jest.fn}
       />
     );
     const activeTab = screen.getByRole('tab', { name: '+ 1 den' });
@@ -127,7 +127,7 @@ describe('ExchangeList', () => {
             isFavorite: true,
           },
         ]}
-        favoriteCurrencyAdd={jest.fn}
+        addFavoriteCurrency={jest.fn}
       />
     );
     const activeTab = screen.getByRole('tab', { name: 'Aktualni' });

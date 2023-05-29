@@ -13,7 +13,7 @@ import { parseViewFromUrl } from '@/utils/parseViewFromUrl';
 
 interface TableProps {
   data: Currency[];
-  favoriteCurrencyAdd: (currency: string) => void;
+  addFavoriteCurrency: (currency: string) => void;
 }
 
 const tabItems: TabsProps['items'] = [
@@ -35,7 +35,7 @@ const tabItems: TabsProps['items'] = [
   },
 ];
 
-export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Element => {
+export const ExchangeList = ({ data, addFavoriteCurrency }: TableProps): JSX.Element => {
   const params = useSearchParams();
   const [activeView, setActiveView] = useState(parseViewFromUrl(params.get('view'), tabItems));
   const [exchangeList, setExchangeList] = useState<Currency[]>(data);
@@ -68,7 +68,7 @@ export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Ele
           if (currency.row.original.isFavorite) return null;
           return (
             <button
-              onClick={() => favoriteCurrencyAdd(currency.row.original.shortName)}
+              onClick={() => addFavoriteCurrency(currency.row.original.shortName)}
               className={'underline text-typography-secondary hover:text-typography-primary'}
             >
               Oblíbená
@@ -77,7 +77,7 @@ export const ExchangeList = ({ data, favoriteCurrencyAdd }: TableProps): JSX.Ele
         },
       },
     ],
-    [favoriteCurrencyAdd, activeView]
+    [addFavoriteCurrency, activeView]
   );
 
   useEffect(() => {

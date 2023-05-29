@@ -1,3 +1,5 @@
+'use client';
+
 import { Currency } from '@/types';
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table';
 import React from 'react';
@@ -15,7 +17,7 @@ export const Table = ({ columns, data }: TableProps): JSX.Element => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const rowClass = `grid grid-cols-${columns.length} items-center py-3 w-full gap-4 px-4`;
+  const rowClass = `grid grid-cols-7 items-center py-3 w-full gap-4 px-4`;
 
   return (
     <div>

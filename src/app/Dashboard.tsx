@@ -8,7 +8,7 @@ import { FavoriteCurrencies } from './FavoriteCurrencies';
 import { useFavoriteCurrency } from '@/context/FavoriteCurrencyContext';
 
 export const Dashboard = (): JSX.Element => {
-  const { favoriteCurrencies, favoriteCurrencyAdd, favoriteCurrencyDelete } = useFavoriteCurrency();
+  const { favoriteCurrencies, addFavoriteCurrency, deleteFavoriteCurrency } = useFavoriteCurrency();
 
   const currenciesList = useMemo<Currency[]>(
     () =>
@@ -19,12 +19,12 @@ export const Dashboard = (): JSX.Element => {
     [favoriteCurrencies]
   );
 
-  const favoriteCurrenciesList: Currency[] = currenciesList.filter((item) => item.isFavorite);
+  const favoriteCurrenciesList: Currency[] = useMemo(() => currenciesList.filter((item) => item.isFavorite), [currenciesList]);
 
   return (
     <div className="w-full flex justify-center flex-col items-center gap-5 px-10 py-5">
-      <FavoriteCurrencies favoriteCurrencies={favoriteCurrenciesList} favoriteCurrencyDelete={favoriteCurrencyDelete} />
-      <ExchangeList favoriteCurrencyAdd={favoriteCurrencyAdd} data={currenciesList} />
+      <FavoriteCurrencies favoriteCurrencies={favoriteCurrenciesList} deleteFavoriteCurrency={deleteFavoriteCurrency} />
+      <ExchangeList addFavoriteCurrency={addFavoriteCurrency} data={currenciesList} />
     </div>
   );
 };

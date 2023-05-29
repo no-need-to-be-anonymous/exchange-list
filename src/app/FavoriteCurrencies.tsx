@@ -9,10 +9,10 @@ import React, { useMemo } from 'react';
 
 interface FavoriteCurrenciesProps {
   favoriteCurrencies: Currency[];
-  favoriteCurrencyDelete: (currency: string) => void;
+  deleteFavoriteCurrency: (currency: string) => void;
 }
 
-export const FavoriteCurrencies = ({ favoriteCurrencies, favoriteCurrencyDelete }: FavoriteCurrenciesProps): JSX.Element => {
+export const FavoriteCurrencies = ({ favoriteCurrencies, deleteFavoriteCurrency }: FavoriteCurrenciesProps): JSX.Element => {
   const columns = useMemo<ColumnDef<Currency, string>[]>(
     () => [
       ...commonColumns,
@@ -31,7 +31,7 @@ export const FavoriteCurrencies = ({ favoriteCurrencies, favoriteCurrencyDelete 
         cell: (currency) => {
           return (
             <button
-              onClick={() => favoriteCurrencyDelete(currency.row.original.shortName)}
+              onClick={() => deleteFavoriteCurrency(currency.row.original.shortName)}
               className={'underline text-typography-secondary hover:text-typography-primary'}
             >
               Zrušit
@@ -40,17 +40,17 @@ export const FavoriteCurrencies = ({ favoriteCurrencies, favoriteCurrencyDelete 
         },
       },
     ],
-    [favoriteCurrencyDelete]
+    [deleteFavoriteCurrency]
   );
 
   return (
-    <>
-      <h2 className="text-typography-secondary">Vaše oblíbené</h2>
+    <div className="px-10">
+      <h2 className="text-typography-secondary text-center">Vaše oblíbené</h2>
       {favoriteCurrencies.length === 0 ? (
-        <div className="text-typography-secondary font-medium">Nemáte žádné oblíbené měny</div>
+        <p className="text-typography-secondary font-medium">Nemáte žádné oblíbené měny</p>
       ) : (
         <Table key={2} columns={columns} data={favoriteCurrencies} />
       )}
-    </>
+    </div>
   );
 };

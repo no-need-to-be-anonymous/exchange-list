@@ -17,7 +17,7 @@ describe('ExchangeList', () => {
             isFavorite: false,
           },
         ]}
-        favoriteCurrencyDelete={() => {}}
+        deleteFavoriteCurrency={() => {}}
       />
     );
 
@@ -27,7 +27,7 @@ describe('ExchangeList', () => {
   });
 
   it('should call favoriteCurrencyAdd when favorite button is clicked', () => {
-    const favoriteCurrencyDelete = jest.fn();
+    const deleteFavoriteCurrency = jest.fn();
     render(
       <FavoriteCurrencies
         favoriteCurrencies={[
@@ -42,18 +42,18 @@ describe('ExchangeList', () => {
             isFavorite: true,
           },
         ]}
-        favoriteCurrencyDelete={favoriteCurrencyDelete}
+        deleteFavoriteCurrency={deleteFavoriteCurrency}
       />
     );
-    const favoriteButton = screen.getByRole('button', { name: 'Zrušit' });
+    const deleteButton = screen.getByRole('button', { name: 'Zrušit' });
 
-    favoriteButton.click();
+    deleteButton.click();
 
-    expect(favoriteCurrencyDelete).toHaveBeenCalledTimes(1);
+    expect(deleteFavoriteCurrency).toHaveBeenCalledTimes(1);
   });
 
   it('should show info text when there are not favorite currencies', () => {
-    render(<FavoriteCurrencies favoriteCurrencies={[]} favoriteCurrencyDelete={jest.fn} />);
+    render(<FavoriteCurrencies favoriteCurrencies={[]} deleteFavoriteCurrency={jest.fn} />);
 
     expect(screen.getByText('Nemáte žádné oblíbené měny')).toBeInTheDocument();
   });
